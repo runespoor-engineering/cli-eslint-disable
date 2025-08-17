@@ -20,7 +20,11 @@ concurrency:
   cancel-in-progress: ${{ github.ref == 'refs/heads/main' }}
 
 jobs:
+  build:
+    uses: ./.github/workflows/reusable-build.yml
+
   test:
+    needs: [build]
     uses: ./.github/workflows/reusable-test.yml
     with:
       type: main
